@@ -1,23 +1,28 @@
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest'
 import supertest from 'supertest'
-import { PrismaClient } from '@prisma/client'
-import app from '../../server/src/index'
+// import { PrismaClient } from '@prisma/client'
+// import app from '../../server/src/index'
 
-/**
- * Integration tests for the HabitStreak API.
- * These tests call the real Express app with a real PostgreSQL test database.
- * The TEST_DATABASE_URL environment variable must be set before running.
- *
- * The setup.ts file ensures DATABASE_URL is overridden with TEST_DATABASE_URL
- * so Prisma connects to the test DB, not the dev DB.
- */
+// /**
+//  * Integration tests for the HabitStreak API.
+//  * These tests call the real Express app with a real PostgreSQL test database.
+//  * The TEST_DATABASE_URL environment variable must be set before running.
+//  *
+//  * The setup.ts file ensures DATABASE_URL is overridden with TEST_DATABASE_URL
+//  * so Prisma connects to the test DB, not the dev DB.
+//  */
+
+// const request = supertest(app)
+
+// // Use a separate Prisma client for test cleanup
+// const prisma = new PrismaClient({
+//   datasources: { db: { url: process.env.DATABASE_URL } },
+// })
+
+import app from '../../server/src/index'
+import { prisma } from '../../server/src/lib/prisma'
 
 const request = supertest(app)
-
-// Use a separate Prisma client for test cleanup
-const prisma = new PrismaClient({
-  datasources: { db: { url: process.env.DATABASE_URL } },
-})
 
 beforeAll(async () => {
   await prisma.$connect()
